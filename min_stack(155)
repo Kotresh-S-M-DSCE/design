@@ -1,0 +1,36 @@
+class MinStack {
+
+    public MinStack() {
+        
+    }
+    List<Integer> stack=new ArrayList<>();
+    List<Integer> mini=new ArrayList<>();
+    public void push(int value) {
+        if(mini.size()==0||mini.get(mini.size()-1)>=value)
+           mini.add(value);
+        stack.add(value);
+    }
+    
+    public void pop() {
+        if(mini.get(mini.size()-1).equals(stack.get(stack.size()-1)))
+           mini.remove(mini.size()-1);
+        stack.remove(stack.size()-1);
+    }
+    
+    public int top() {
+        return stack.get(stack.size()-1);
+    }
+    
+    public int getMin() {
+        return mini.get(mini.size()-1);
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(value);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
