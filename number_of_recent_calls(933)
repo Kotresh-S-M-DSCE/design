@@ -4,10 +4,12 @@ class RecentCounter {
         count=0;
     }
     int[] queue=new int[10000];
-    int r=-1;
+    int r=-1,l=-1;
     public int ping(int t) {
         queue[++r]=t;
-        int a=t-3000,b=t,ret=0,l=0;
+        if(l==-1)
+           l++;
+        int a=t-3000,b=t,ret=0;
         while(l<=r&&queue[l]<a)
            l++;
         l--;
