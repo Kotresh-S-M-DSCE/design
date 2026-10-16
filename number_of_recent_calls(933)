@@ -1,0 +1,22 @@
+class RecentCounter {
+    int count;
+    public RecentCounter() {
+        count=0;
+    }
+    int[] queue=new int[10000];
+    int r=-1;
+    public int ping(int t) {
+        queue[++r]=t;
+        int a=t-3000,b=t,ret=0,l=0;
+        while(l<=r&&queue[l]<a)
+           l++;
+        l--;
+        return (r-l);
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
