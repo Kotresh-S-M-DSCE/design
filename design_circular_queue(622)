@@ -1,0 +1,85 @@
+public class ListNode
+{
+    int val;
+    ListNode next;
+    ListNode(){}
+    ListNode(int val){
+        this.val=val;
+    }
+    ListNode(int val,ListNode next)
+    {
+        this.val=val;
+        this.next=next;
+    }
+}
+class MyCircularQueue {
+
+    ListNode head=null,temp=null;
+    int size=0,count=0;
+    public MyCircularQueue(int k) {
+        size=k;
+    }
+    
+    public boolean enQueue(int value) {
+        if(count==size)
+            return false;
+        count++;
+        ListNode node=new ListNode(value);
+        if(head==null)
+        {
+            head=node;
+            temp=node;
+        }
+        else
+        {
+            temp.next=node;
+            temp=temp.next;
+        }
+        return true;
+    }
+    
+    public boolean deQueue() {
+        if(count==0)
+           return false;
+        ListNode cur=head;
+        head=head.next;
+        count--;
+        cur.next=null;
+        return true;
+    }
+    
+    public int Front() {
+        if(count==0)
+           return -1;
+        return head.val;
+    }
+    
+    public int Rear() {
+        if(count==0)
+            return -1;
+        return temp.val;
+    }
+    
+    public boolean isEmpty() {
+        if(count==0)
+           return true;
+        return false;
+    }
+    
+    public boolean isFull() {
+        if(count==size)
+           return true;
+        return false;
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */
