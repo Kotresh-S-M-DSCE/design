@@ -1,0 +1,84 @@
+public class ListNode
+{
+    int val;
+    ListNode next;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val=val;
+    }
+    ListNode(int x,ListNode next)
+    {
+        this.val=val;
+        this.next=next;
+    }
+} 
+class MyHashSet {
+
+    ListNode head=null;
+    public MyHashSet() {
+        
+    }
+    
+    public void add(int key) {
+        ListNode temp=head,prev=head;
+        ListNode node=new ListNode(key);
+        while(temp!=null&&temp.val!=key)
+        {
+            prev=temp;
+            temp=temp.next;
+        }
+        if(head==null)
+        {
+            head=node;
+            return;
+        }
+        if(temp==null)
+            prev.next=node;
+    }
+    
+    public void remove(int key) {
+        ListNode temp=head,prev=null;
+        if(head==null)
+            return;
+        while(temp!=null)
+        {
+            if(temp.val==key)
+               break;
+            prev=temp;
+            temp=temp.next;
+        }
+        if(temp==null)
+            return;
+        if(temp==head)
+        {
+            ListNode cur=head;
+            head=head.next;
+            cur.next=null;
+            return;
+        }
+        prev.next=temp.next;
+        temp.next=null;
+    }
+    
+    public boolean contains(int key) {
+        ListNode temp=head;
+        if(head==null)
+           return false;
+        while(temp!=null)
+        {
+            if(temp.val==key)
+               return true;
+            temp=temp.next;
+        }
+        return false;
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
