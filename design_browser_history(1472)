@@ -1,0 +1,75 @@
+public class ListNode
+{
+    String val;
+    ListNode next;
+    ListNode prev;
+    ListNode(){}
+    ListNode(String val)
+    {
+        this.val=val;
+    }
+    ListNode(String x,ListNode next)
+    {
+        this.val=val;
+        this.next=next;
+    }
+    ListNode(String x,ListNode next,ListNode prev)
+    {
+        this.val=val;
+        this.next=next;
+        this.prev=prev;
+    }
+} 
+class BrowserHistory {
+
+    ListNode head=null,temp=null; 
+    public BrowserHistory(String homepage) {
+        ListNode node=new ListNode(homepage);
+        head=node;
+        temp=node;
+    }
+    // leetcode->google-><-facebook-><-youtube
+    public void visit(String url) {
+        ListNode node=new ListNode(url);
+        ListNode previous=temp;
+        temp.next=node;
+        temp=temp.next;
+        temp.prev=previous;
+    }
+    
+    public String back(int steps) {
+        int count=0;
+        while(temp!=null)
+        {
+            if(count==steps)
+               return temp.val;
+            temp=temp.prev;
+            count++;
+        }
+        temp=head;
+        return head.val;
+    }
+    
+    public String forward(int steps) {
+        int count=0;
+        ListNode prev=temp;
+        while(temp!=null)
+        {
+            prev=temp;
+            if(count==steps)
+                return temp.val;
+            count++;
+            temp=temp.next;
+        }
+        temp=prev;
+        return prev.val;
+    }
+}
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory obj = new BrowserHistory(homepage);
+ * obj.visit(url);
+ * String param_2 = obj.back(steps);
+ * String param_3 = obj.forward(steps);
+ */
