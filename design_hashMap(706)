@@ -1,0 +1,93 @@
+public class ListNode
+{
+    int val;
+    ListNode next;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val=val;
+    }
+    ListNode(int x,ListNode next)
+    {
+        this.val=val;
+        this.next=next;
+    }
+} 
+class MyHashMap {
+    ListNode first=null,second=null;
+    public MyHashMap() {
+        
+    }
+    
+    public void put(int key, int value) {
+        ListNode node1=new ListNode(key);
+        ListNode node2=new ListNode(value);
+        if(first==null)
+        {
+            first=node1;
+            second=node2;
+        }
+        else
+        {
+            ListNode trav1=first,trav2=second,prev1=null,prev2=null;
+            while(trav1!=null)
+            {
+                prev1=trav1;
+                prev2=trav2;
+                if(trav1.val==key)
+                {
+                    trav2.val=value;
+                    return;
+                }
+                trav1=trav1.next;
+                trav2=trav2.next;
+            }
+            prev1.next=node1;
+            prev2.next=node2;
+        }
+    }
+    
+    public int get(int key) {
+        ListNode trav1=first,trav2=second;
+        while(trav1!=null)
+        {
+            if(trav1.val==key)
+                return trav2.val;
+            trav1=trav1.next;
+            trav2=trav2.next;
+        }
+        return -1;
+    }
+    
+    public void remove(int key) {
+        ListNode trav1=first,trav2=second,prev1=null,prev2=null;
+        if(trav1==null)
+           return;
+        if(trav1.val==key)
+        {
+            first=first.next;
+            second=second.next;
+            return;
+        }
+        while(trav1!=null&&trav1.val!=key)
+        {
+            prev1=trav1;
+            prev2=trav2;
+            trav1=trav1.next;
+            trav2=trav2.next;
+        }
+        if(trav1!=null)
+        {
+            prev1.next=trav1.next;
+            prev2.next=trav2.next;
+        }
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
